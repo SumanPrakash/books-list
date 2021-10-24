@@ -1,5 +1,6 @@
 import { LessonEntityService } from "./services/lesson-entity.service";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { HomeComponent } from "./home/home.component";
 import { CoursesCardListComponent } from "./courses-card-list/courses-card-list.component";
@@ -32,6 +33,7 @@ import { compareLessons, Lesson } from "./model/lesson";
 import { CoursesResolver } from "./services/courses.resolver";
 import { CourseEntityService } from "./services/course-entity.service";
 import { CoursesDataService } from "./services/courses-data.service";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 export const coursesRoutes: Routes = [
   {
@@ -56,6 +58,9 @@ const entityMetadata: EntityMetadataMap = {
     entityDispatcherOptions: {
       optimisticUpdate: true,
     },
+    filterFn: (entities: { name: string }[], search: string) => {
+      return entities.filter((entity) => -1 < entity.name.indexOf(search));
+    },
   },
   Lesson: {
     sortComparer: compareLessons,
@@ -65,6 +70,7 @@ const entityMetadata: EntityMetadataMap = {
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
@@ -72,6 +78,7 @@ const entityMetadata: EntityMetadataMap = {
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatGridListModule,
     MatSortModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,

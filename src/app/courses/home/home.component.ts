@@ -3,9 +3,9 @@ import { Component, OnInit } from "@angular/core";
 import { compareCourses, Course } from "../model/course";
 import { Observable } from "rxjs";
 import { defaultDialogConfig } from "../shared/default-dialog-config";
-import { EditCourseDialogComponent } from "../edit-course-dialog/edit-course-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { map, shareReplay } from "rxjs/operators";
+import { EditCourseDialogComponent } from "../edit-course-dialog/edit-course-dialog.component";
 
 @Component({
   selector: "home",
@@ -13,13 +13,16 @@ import { map, shareReplay } from "rxjs/operators";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  promoTotal$: Observable<number>;
+  // promoTotal$: Observable<number>;
 
   loading$: Observable<boolean>;
 
-  beginnerCourses$: Observable<Course[]>;
+  // beginnerCourses$: Observable<Course[]>;
+  beginnerCourses$: Observable<any>;
 
   advancedCourses$: Observable<Course[]>;
+
+  searchText = "";
 
   constructor(
     private dialog: MatDialog,
@@ -31,16 +34,15 @@ export class HomeComponent implements OnInit {
   }
 
   reload() {
-    this.beginnerCourses$ = this.coursesService.entities$;
-
-    this.advancedCourses$ = this.coursesService.entities$.pipe(
+    this.beginnerCourses$ = this.coursesService.entities$.pipe(
       map((courses) =>
-        courses.filter((course) => course.category == "ADVANCED")
+        courses.filter(
+          (course) =>
+            course["volumeInfo"].title
+              .toLowerCase()
+              .indexOf(this.searchText.toLowerCase()) != -1
+        )
       )
-    );
-
-    this.promoTotal$ = this.coursesService.entities$.pipe(
-      map((courses) => courses.filter((course) => course.promo).length)
     );
 
     this.loading$ = this.coursesService.loading$;
@@ -50,7 +52,7 @@ export class HomeComponent implements OnInit {
     const dialogConfig = defaultDialogConfig();
 
     dialogConfig.data = {
-      dialogTitle: "Create Course",
+      dialogTitle: "Create New Book",
       mode: "create",
     };
 

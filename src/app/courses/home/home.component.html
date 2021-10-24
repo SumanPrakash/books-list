@@ -1,15 +1,29 @@
 <div class="courses-panel">
   <div class="header">
-    <mat-icon>search</mat-icon>
-    <mat-form-field class="example-full-width">
+    <h2 class="title">All Books</h2>
+    <mat-form-field class="example-full-width search-bar-width">
       <mat-label>Search</mat-label>
-      <input matInput placeholder="Search" type="search" />
+      <input
+        matInput
+        placeholder="Search"
+        type="search"
+        [(ngModel)]="searchText"
+        (keyup)="reload()"
+      />
+      <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
 
-    <h2 class="title">Books</h2>
+    <!-- <mat-form-field>
+      <input matInput placeholder="Filter" />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field> -->
 
-    <button mat-mini-fab>
+    <!-- <button mat-mini-fab>
       <mat-icon class="add-course-btn" (click)="onAddCourse()">add</mat-icon>
+    </button> -->
+
+    <button mat-raised-button color="primary" (click)="onAddCourse()">
+      Create New Book
     </button>
   </div>
 
