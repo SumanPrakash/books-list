@@ -1,19 +1,19 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #start>
     <mat-nav-list (click)="start.close()">
-      <a mat-list-item routerLink="/courses">
+      <a mat-list-item routerLink="/books">
         <mat-icon>menu</mat-icon>
         <span>MENU</span>
       </a>
 
-      <a mat-list-item routerLink="/courses">
+      <a mat-list-item routerLink="/books">
         <mat-icon>library_books</mat-icon>
         <span>CONTENT MANAGEMENT</span>
       </a>
 
-      <a mat-list-item routerLink="/courses">
+      <a mat-list-item routerLink="/books">
         <mat-icon>book</mat-icon>
-        <span>COURSES</span>
+        <span>BOOKS</span>
       </a>
 
       <a mat-list-item routerLink="/login" *ngIf="isLoggedOut$ | async">

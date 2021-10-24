@@ -6,7 +6,7 @@ export const USERS = {
   },
 };
 
-export const COURSES: any = {
+export const BOOKS: any = {
   kind: "books#volumes",
   totalItems: 1610,
   items: [
@@ -870,8 +870,8 @@ export const COURSES: any = {
   ],
 };
 
-export function findCourseById(courseId: number) {
-  return COURSES[courseId];
+export function findBookById(bookId: number) {
+  return BOOKS[bookId];
 }
 
 export function authenticate(email: string, password: string) {

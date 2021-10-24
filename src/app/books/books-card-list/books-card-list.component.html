@@ -1,0 +1,13 @@
+<mat-grid-list cols="2" rowHeight="12rem">
+  <mat-grid-tile *ngFor="let book of books">
+    <mat-card class="book-card mat-elevation-z10">
+      <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+
+      <mat-card-content>
+        <p>Authors: {{ book.volumeInfo.authors.join(",") }}</p>
+        <p>Publisher: {{ book.volumeInfo.publisher }}</p>
+        <p>Published Date: {{ book.volumeInfo.publishedDate }}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

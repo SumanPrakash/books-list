@@ -1,11 +1,10 @@
 import * as express from "express";
 import { Application } from "express";
-import { getAllCourses, getCourseByUrl } from "./get-courses.route";
-// import {searchLessons} from "./search-lessons.route";
+import { getAllBooks, getBookByUrl } from "./get-books.route";
 import { loginUser } from "./auth.route";
-import { saveCourse } from "./save-course.route";
-import { createCourse } from "./create-course.route";
-import { deleteCourse } from "./delete-course.route";
+import { saveBook } from "./save-book.route";
+import { createBook } from "./create-book.route";
+import { deleteBook } from "./delete-book.route";
 
 const bodyParser = require("body-parser");
 
@@ -15,17 +14,15 @@ app.use(bodyParser.json());
 
 app.route("/api/login").post(loginUser);
 
-app.route("/api/courses").get(getAllCourses);
+app.route("/api/books").get(getAllBooks);
 
-app.route("/api/course").post(createCourse);
+app.route("/api/book").post(createBook);
 
-app.route("/api/course/:id").put(saveCourse);
+app.route("/api/book/:id").put(saveBook);
 
-app.route("/api/course/:id").delete(deleteCourse);
+app.route("/api/book/:id").delete(deleteBook);
 
-app.route("/api/courses/:courseUrl").get(getCourseByUrl);
-
-// app.route("/api/lessons").get(searchLessons);
+app.route("/api/books/:bookUrl").get(getBookByUrl);
 
 const httpServer: any = app.listen(9000, () => {
   console.log(

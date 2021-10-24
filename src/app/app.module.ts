@@ -28,9 +28,9 @@ import { EntityDataModule } from "@ngrx/data";
 
 const routes: Routes = [
   {
-    path: "courses",
+    path: "books",
     loadChildren: () =>
-      import("./courses/courses.module").then((m) => m.CoursesModule),
+      import("./books/books.module").then((m) => m.BooksModule),
     canActivate: [AuthGuard],
   },
   {

@@ -1,0 +1,9 @@
+<div class="book" *ngIf="book$ | async as book">
+  <h2>{{ book?.description }}</h2>
+
+  <img class="book-thumbnail mat-elevation-z8" [src]="book?.iconUrl" />
+
+  <div class="spinner-container" *ngIf="loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

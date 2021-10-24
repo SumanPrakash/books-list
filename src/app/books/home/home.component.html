@@ -1,0 +1,23 @@
+<div class="books-panel">
+  <div class="header">
+    <h2 class="title">All Books</h2>
+    <mat-form-field class="example-full-width search-bar-width">
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        placeholder="Search"
+        type="search"
+        [(ngModel)]="searchText"
+        (keyup)="reload()"
+      />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onAddBook()">
+      Create New Book
+    </button>
+  </div>
+
+  <books-card-list (bookChanged)="reload()" [books]="books$ | async">
+  </books-card-list>
+</div>

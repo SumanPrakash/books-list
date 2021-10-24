@@ -1,11 +1,10 @@
-import { LessonEntityService } from "./services/lesson-entity.service";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { HomeComponent } from "./home/home.component";
-import { CoursesCardListComponent } from "./courses-card-list/courses-card-list.component";
-import { EditCourseDialogComponent } from "./edit-course-dialog/edit-course-dialog.component";
-import { CourseComponent } from "./course/course.component";
+import { BooksCardListComponent } from "./books-card-list/books-card-list.component";
+import { EditBookDialogComponent } from "./edit-book-dialog/edit-book-dialog.component";
+import { BookComponent } from "./book/book.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
@@ -27,43 +26,39 @@ import {
   EntityDefinitionService,
   EntityMetadataMap,
 } from "@ngrx/data";
-import { compareCourses, Course } from "./model/course";
+import { compareBooks, Book } from "./model/book";
 
-import { compareLessons, Lesson } from "./model/lesson";
-import { CoursesResolver } from "./services/courses.resolver";
-import { CourseEntityService } from "./services/course-entity.service";
-import { CoursesDataService } from "./services/courses-data.service";
+import { BooksResolver } from "./services/books.resolver";
+import { BookEntityService } from "./services/book-entity.service";
+import { BooksDataService } from "./services/books-data.service";
 import { MatGridListModule } from "@angular/material/grid-list";
 
-export const coursesRoutes: Routes = [
+export const booksRoutes: Routes = [
   {
     path: "",
     component: HomeComponent,
     resolve: {
-      courses: CoursesResolver,
+      books: BooksResolver,
     },
   },
   {
-    path: ":courseUrl",
-    component: CourseComponent,
+    path: ":bookUrl",
+    component: BookComponent,
     resolve: {
-      courses: CoursesResolver,
+      books: BooksResolver,
     },
   },
 ];
 
 const entityMetadata: EntityMetadataMap = {
-  Course: {
-    sortComparer: compareCourses,
+  Book: {
+    sortComparer: compareBooks,
     entityDispatcherOptions: {
       optimisticUpdate: true,
     },
     filterFn: (entities: { name: string }[], search: string) => {
       return entities.filter((entity) => -1 < entity.name.indexOf(search));
     },
-  },
-  Lesson: {
-    sortComparer: compareLessons,
   },
 };
 
@@ -87,35 +82,30 @@ const entityMetadata: EntityMetadataMap = {
     MatDatepickerModule,
     MatMomentDateModule,
     ReactiveFormsModule,
-    RouterModule.forChild(coursesRoutes),
+    RouterModule.forChild(booksRoutes),
   ],
   declarations: [
     HomeComponent,
-    CoursesCardListComponent,
-    EditCourseDialogComponent,
-    CourseComponent,
+    BooksCardListComponent,
+    EditBookDialogComponent,
+    BookComponent,
   ],
   exports: [
     HomeComponent,
-    CoursesCardListComponent,
-    EditCourseDialogComponent,
-    CourseComponent,
+    BooksCardListComponent,
+    EditBookDialogComponent,
+    BookComponent,
   ],
-  entryComponents: [EditCourseDialogComponent],
-  providers: [
-    CoursesResolver,
-    CourseEntityService,
-    LessonEntityService,
-    CoursesDataService,
-  ],
+  entryComponents: [EditBookDialogComponent],
+  providers: [BooksResolver, BookEntityService, BooksDataService],
 })
-export class CoursesModule {
+export class BooksModule {
   constructor(
     private eds: EntityDefinitionService,
     private entityDataService: EntityDataService,
-    private coursesDataService: CoursesDataService
+    private booksDataService: BooksDataService
   ) {
     eds.registerMetadataMap(entityMetadata);
-    entityDataService.registerService("Course", coursesDataService);
+    entityDataService.registerService("Book", booksDataService);
   }
 }

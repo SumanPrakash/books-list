@@ -29,16 +29,6 @@
         </mat-form-field>
       </ng-container>
 
-      <!-- <mat-form-field>
-        <mat-select placeholder="Select category" formControlName="category">
-          <mat-option value="BEGINNER"> Beginner</mat-option>
-          <mat-option value="INTERMEDIATE"> Intermediate</mat-option>
-          <mat-option value="ADVANCED"> Advanced</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
-      <!-- <mat-slide-toggle formControlName="promo">Promotion On</mat-slide-toggle> -->
-
       <mat-form-field>
         <textarea
           matInput
@@ -57,7 +47,7 @@
   <button
     mat-raised-button
     color="primary"
-    [disabled]="!form?.valid || (this.loading$ | async)"
+    [disabled]="true"
     (click)="onSave()"
   >
     Save
