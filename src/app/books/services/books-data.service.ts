@@ -14,4 +14,10 @@ export class BooksDataService extends DefaultDataService<Book> {
   getAll(): Observable<Book[]> {
     return this.http.get("/api/books").pipe(map((res) => res["payload"]));
   }
+
+  // getAll(): Observable<Book[]> {
+  //   return this.http
+  //     .get("https://www.googleapis.com/books/v1/volumes?q=kaplan%20test%20prep")
+  //     .pipe(map((res) => res["items"]));
+  // }
 }
