@@ -29,7 +29,9 @@ export class CoursesCardListComponent implements OnInit {
     private courseService: CourseEntityService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("testing", this.courses);
+  }
 
   editCourse(course: Course) {
     const dialogConfig = defaultDialogConfig();

@@ -1,40 +1,35 @@
+// import {Request, Response} from 'express';
+// import {LESSONS} from "./db-data";
+// import {setTimeout} from "timers";
 
+// export function searchLessons(req: Request, res: Response) {
 
+//     console.log('Searching for lessons ...');
 
-import {Request, Response} from 'express';
-import {LESSONS} from "./db-data";
-import {setTimeout} from "timers";
+//         const queryParams = req.query;
 
+//         const courseId = queryParams.courseId,
+//             filter = queryParams.filter || '',
+//             sortOrder = queryParams.sortOrder || 'asc',
+//             pageNumber = parseInt(queryParams.pageNumber) || 0,
+//             pageSize = parseInt(queryParams.pageSize);
 
+//         let lessons = Object.values(LESSONS).filter(lesson => lesson.courseId == courseId).sort((l1, l2) => l1.id - l2.id);
 
-export function searchLessons(req: Request, res: Response) {
+//         if (filter) {
+//             lessons = lessons.filter(lesson => lesson.description.trim().toLowerCase().search(filter.toLowerCase()) >= 0);
+//         }
 
-    console.log('Searching for lessons ...');
+//         if (sortOrder == "desc") {
+//             lessons = lessons.reverse();
+//         }
 
-        const queryParams = req.query;
+//         const initialPos = pageNumber * pageSize;
 
-        const courseId = queryParams.courseId,
-            filter = queryParams.filter || '',
-            sortOrder = queryParams.sortOrder || 'asc',
-            pageNumber = parseInt(queryParams.pageNumber) || 0,
-            pageSize = parseInt(queryParams.pageSize);
+//         console.log(`Retrieving lessons page starting at position ${initialPos}, page size ${pageSize} for course ${courseId}`);
 
-        let lessons = Object.values(LESSONS).filter(lesson => lesson.courseId == courseId).sort((l1, l2) => l1.id - l2.id);
+//         const lessonsPage = lessons.slice(initialPos, initialPos + pageSize);
 
-        if (filter) {
-            lessons = lessons.filter(lesson => lesson.description.trim().toLowerCase().search(filter.toLowerCase()) >= 0);
-        }
+//         res.status(200).json(lessonsPage);
 
-        if (sortOrder == "desc") {
-            lessons = lessons.reverse();
-        }
-
-        const initialPos = pageNumber * pageSize;
-
-        console.log(`Retrieving lessons page starting at position ${initialPos}, page size ${pageSize} for course ${courseId}`);
-
-        const lessonsPage = lessons.slice(initialPos, initialPos + pageSize);
-
-        res.status(200).json(lessonsPage);
-
-}
+// }
